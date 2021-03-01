@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12, col-sm-5">
+            <h3 [@list] class="text-center" *ngIf="summaryGears.length === 0" routerLink="/gears" style="color: white; cursor: pointer;">Click here to add a new gear!</h3>
+            <hr *ngIf="summaryGears.length > 0">
+            <ul *ngIf="summaryGears.length > 0" class="list-group">
+                <div  class="list-group-item" *ngFor="let gearEl of summaryGears; let i = index" [@list]>
+                    <h4>{{ gearEl.item }}</h4>
+                    <p>{{ gearEl.kilometersAmmount }} / {{gearEl.interval }} km</p>
+                    <div class="help-block">{{ gearEl.left }} kilometers left</div>
+                    <div class="progress" *ngIf="gearEl.procent < 80">
+                        <div class="progress-bar" style="background-color:rgb(4, 71, 13);" role="progressbar" style="width: {{ gearEl.procent }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress" *ngIf="gearEl.procent > 80">
+                        <div class="progress-bar" style="background-color:rgb(4, 71, 13);" role="progressbar" style="width: {{ gearEl.procent }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <h3 [@list] class="text-center" *ngIf="kilometersMonthly.length === 0" routerLink="/kilometers" style="color: white; cursor: pointer;">Click here to report first ride!</h3>
+            <hr *ngIf="kilometersMonthly.length > 0">
+            <app-distance-table *ngIf="kilometersMonthly.length > 0"></app-distance-table>
+        </div>
+        
+        <div class="col-xs-12 col-sm-3">
+            <hr *ngIf="kilometersMonthly.length > 0">
+            <app-distance-monthly-table *ngIf="kilometersMonthly.length > 0"></app-distance-monthly-table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,84 @@
+<!-- (click)="show2(i)" -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" >
+            <app-alert-model (close)="closeIt()" (delete)="deleteIt()" *ngIf="deletable && alertClosed" [message]="('You are deleting your gear, do you know it?!')"></app-alert-model>
+            <ul class="list-group">
+                <app-gear-clicked
+                *ngFor="let gearEl of gears; let i = index"
+                [index]="i"
+                [gear]="gearEl"
+                (click)="show2(i)">
+            </app-gear-clicked>
+            </ul>
+        <h3 [@list] *ngIf="gears.length === 0" style="color: white;">Click Add gear!</h3>
+        </div>
+    </div>
+</div>
+<div class="container" [@list]>
+    <div class="row">
+        <div class="col xs 12 col-sm-8 col-sm-offset-2">
+            <button mat-stroked-button style="color: white;" (click) = "show()" [disabled]="editable || deletable">Add gear</button>
+            <button  mat-stroked-button style="color: white;" [disabled]="deletable" (click) = "edit()">Edit gear</button>
+            <button  mat-stroked-button style="color: white;" [disabled]="editable" (click) = "delete()">Delete gear</button>
+            
+            <p *ngIf="editable" class="help-block">Select gear to edit it!</p>
+            <p *ngIf="deletable" class="help-block">Select gear to delete it!</p>
+        </div>
+    </div>
+    
+</div>
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add new gear</h4>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="gearForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control"/>
+                    <span class="help-block" *ngIf="!gearForm.get('name').valid && gearForm.get('name').touched">Please enter a valid name!</span>
+                </div>
+                <div class="form-group">
+                    <label>Date of replace</label>
+                    <input type="date" formControlName="date" class="form-control" />
+                    <span class="help-block" *ngIf="!gearForm.get('date').valid && gearForm.get('date').touched">Please choose a valid date!</span>
+                </div>
+                <div class="form-group">
+                    <label>Mileage on replacing day</label>
+                    <input type="number" formControlName="actualDistance" class="form-control" />
+                    <span class="help-block" *ngIf="!gearForm.get('actualDistance').valid && gearForm.get('actualDistance').touched">Please enter a valid actual distance!</span>
+                </div>
+                <div class="form-group">
+                    <label>Interval</label>
+                    <input type="number" formControlName="interval" class="form-control" />
+                    <span class="help-block" *ngIf="!gearForm.get('interval').valid && gearForm.get('interval').touched">Please enter a valid interval!</span>
+                </div>
+              <button type="submit" class="btn btn-dark" [disabled]="!gearForm.valid">Add</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide()">Close</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+<div [style.display]="showModal2 ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Manage gear</h4>
+            </div>
+            <div class="modal-body">
+                <app-edit-gear (submitClicked)="hide2()"></app-edit-gear>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide2()">Close</button>
+            </div>
+          </div>
+    </div>
+</div>
