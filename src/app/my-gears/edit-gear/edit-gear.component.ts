@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from 'src/app/data-storage-service';
-import { Gear } from 'src/app/gear.model';
-import { GearService } from 'src/app/gear.service';
+import { DataStorageService } from 'src/app/services/data-storage-service';
+import { Gear } from 'src/app/models/gear.model';
+import { GearService } from 'src/app/services/gear.service';
 
 @Component({
   selector: 'app-edit-gear',

@@ -1,18 +1,19 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" [@list]>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" [@list] style="background-color: rgb(14, 20, 15,0.3); color:white;">
 
   <!-- Position Column -->
   <ng-container matColumnDef="month">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Months of ride</th>
-    <td mat-cell *matCellDef="let element"> {{element.date | date:'MMMM y'}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="color:white">Months of ride</th>
+    <td mat-cell *matCellDef="let element"style="color:white"> {{element.date | date:'MMMM y'}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="amount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
-    <td mat-cell *matCellDef="let element"> {{element.amount}} km </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="color:white"> Distance </th>
+    <td mat-cell *matCellDef="let element" style="color:white"> {{element.amount}} km </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" style="color:white"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="color:white"></tr>
 </table>
 

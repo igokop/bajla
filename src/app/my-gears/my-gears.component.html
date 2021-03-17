@@ -18,9 +18,9 @@
 <div class="container" [@list]>
     <div class="row">
         <div class="col xs 12 col-sm-8 col-sm-offset-2">
-            <button mat-stroked-button style="color: white;" (click) = "show()" [disabled]="editable || deletable">Add gear</button>
-            <button  mat-stroked-button style="color: white;" [disabled]="deletable" (click) = "edit()">Edit gear</button>
-            <button  mat-stroked-button style="color: white;" [disabled]="editable" (click) = "delete()">Delete gear</button>
+            <button  mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" (click) = "show()" [disabled]="editable || deletable">Add gear</button>
+            <button  mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" [disabled]="deletable" (click) = "edit()">Edit gear</button>
+            <button  mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" [disabled]="editable" (click) = "delete()">Delete gear</button>
             
             <p *ngIf="editable" class="help-block">Select gear to edit it!</p>
             <p *ngIf="deletable" class="help-block">Select gear to delete it!</p>
@@ -29,9 +29,9 @@
     
 </div>
 
-<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+<div style="color: white; background-color:rgb(14, 20, 15, 0.7)"[style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-dialog">
+      <div style="color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Add new gear</h4>
         </div>
@@ -57,19 +57,19 @@
                     <input type="number" formControlName="interval" class="form-control" />
                     <span class="help-block" *ngIf="!gearForm.get('interval').valid && gearForm.get('interval').touched">Please enter a valid interval!</span>
                 </div>
-              <button type="submit" class="btn btn-dark" [disabled]="!gearForm.valid">Add</button>
+              <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" class="btn btn-dark" [disabled]="!gearForm.valid">Add</button>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide()">Close</button>
+            <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide()">Close</button>
         </div>
       </div>
     </div>
     </div>
 
-<div [style.display]="showModal2 ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div style="color: white; background-color:rgb(14, 20, 15, 0.7)" [style.display]="showModal2 ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="color: white; background-color:rgb(14, 20, 15, 0.7)" class="modal-dialog">
+        <div style="color: white; background-color:rgb(14, 20, 15, 0.7)" class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Manage gear</h4>
             </div>
@@ -77,7 +77,7 @@
                 <app-edit-gear (submitClicked)="hide2()"></app-edit-gear>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide2()">Close</button>
+                <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="button" class="btn btn-dark" data-dismiss="modal" (click) = "hide2()">Close</button>
             </div>
           </div>
     </div>

@@ -3,9 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from '../data-storage-service';
-import { Gear } from '../gear.model';
-import { GearService } from '../gear.service';
+import { DataStorageService } from '../services/data-storage-service';
+import { Gear } from '../models/gear.model';
+import { GearService } from '../services/gear.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { GearService } from '../gear.service';
       transition('void => *', [
         style({
           opacity: '0',
-          transform: 'translateX(-100px)'
+          transform: 'translateY(-100px)'
         }),
         animate(400)
     ])

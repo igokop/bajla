@@ -1,3 +1,17 @@
 .bg-danger{
     background: red
 }
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: white;
+    
+}
+
+:host ::ng-deep .track circle{       
+    stroke-opacity: 0.4 !important;
+}
+
+
+    .mat-spinner{
+        display: inline;
+    }
+

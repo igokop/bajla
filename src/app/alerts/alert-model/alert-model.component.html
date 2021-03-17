@@ -1,0 +1,8 @@
+<div class="backdrop" (click) = "closeIt()"></div>
+<div [@dialog] class="alert-box">
+    <p>{{ message }}</p>
+    <div class="alert-box-actions">
+        <button style="color: rgb(14, 20, 15, 0.7); background-color:white" class="btn btn-dark" (click) = "deleteIt()">Delete it!</button>
+        <button style="color: rgb(14, 20, 15, 0.7); background-color:white" class="btn btn-dark" (click) = "closeIt()">OK wait!</button>
+    </div>
+</div>

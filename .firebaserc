@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ng-complete-guide-cd0cd"
+    "bajla": "bajla-bike",
+    "default": "bajla-bike"
   }
 }

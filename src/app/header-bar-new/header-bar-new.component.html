@@ -1,39 +1,38 @@
 <mat-sidenav-container class="sidenav-container"
-style="
-      background-image: url('https://rondo.cc/images/galerie/210-1414.jpg');
+  style="
+      background-image: url('/assets/DSC07331.jpg');
       height: 100%;
-      background-size: cover;">
+      background-size: cover;
+      zoom: 100%;
+      scale:1.0">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar style="background-color:rgb(4, 71, 13);color: white;"> Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === false" [disabled]="!logged" routerLink="/home">Home</a>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === false" [disabled]="!logged" routerLink="/gears">Edit my gears</a>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === false" [disabled]="!logged"routerLink="/kilometers">Edit my kilometers</a>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === true" (click)="drawer.toggle()" [disabled]="!logged" routerLink="/home">Home</a>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === true" (click)="drawer.toggle()" [disabled]="!logged" routerLink="/gears">Edit my gears</a>
-      <a mat-list-item routerLinkActive="active"  *ngIf="(isHandset$ | async) === true" (click)="drawer.toggle()" [disabled]="!logged"routerLink="/kilometers">Edit my kilometers</a>
-      <a class="absolutePos" mat-list-item (click)="logOut()" style="cursor: pointer;" *ngIf="logged && ((isHandset$ | async) ===true)" (click)="drawer.toggle()">Log out</a>
-      <a class="absolutePos" mat-list-item (click)="logOut()" style="cursor: pointer;" *ngIf="logged && ((isHandset$ | async) ===false) ">Log out</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar style="background-color: rgb(4, 78, 14); color: white;">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>bajla</span>
+  
+  <mat-sidenav-content (swipeleft)=swipeLeft() (swiperight)=swipeRight()>
+    <app-alert *ngIf="openedAlert" (close)="changeAlertState()">
+      <span style="cursor:pointer; font-size: 54px;" class="material-icons">account_circle</span>
+      <h4>{{userData.email}}</h4>
+      <hr>
+      <p style="cursor:pointer" (click)="logOut()">Log out</p>
+    </app-alert>
+    <mat-toolbar style="position: fixed; z-index: 1; background-color: rgb(14, 20, 15, 0.85); color: white;">
+      
+      <span style="cursor:pointer" routerLink="/home">bajla</span>
+      <span style="width: 95%;"></span>
+      <span style="cursor:pointer"routerLink="/home" class="material-icons" [routerLinkActive]="'is-active'" >home</span>
+      <span style="width: 20px;"></span>
+      <span style="cursor:pointer"routerLink="/gears" class="material-icons" [routerLinkActive]="'is-active'" >handyman</span>
+      <span style="width: 20px;"></span>
+      <span style="cursor:pointer"routerLink="/kilometers" class="material-icons" [routerLinkActive]="'is-active'" >stacked_bar_chart</span>
+      <span style="width: 20px;"></span>
+      <span style="cursor:pointer"routerLink="/routes" class="material-icons" [routerLinkActive]="'is-active'">alt_route</span>
+      <span style="width: 20px;"></span>
+      <span style="cursor:pointer"class="material-icons" (click)="changeAlertState()" *ngIf="logged">account_circle</span>
       
     </mat-toolbar>
-    <ng-content></ng-content>
+    <div style="height: 70px; width:100%;"></div>
+    <ng-content style="position:absolute; z-index: 0;"></ng-content>
+    <div style="height: 70px; width:100%;"></div>
+
 
 
   </mat-sidenav-content>

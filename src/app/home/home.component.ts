@@ -1,12 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from '../data-storage-service';
-import { Distance } from '../distance.model';
-import { Gear } from '../gear.model';
-import { GearService } from '../gear.service';
-import { KilometersService } from '../kilometers.service';
-import { Monthly } from '../monthly.model';
+import { DataStorageService } from '../services/data-storage-service';
+import { Distance } from '../models/distance.model';
+import { Gear } from '../models/gear.model';
+import { GearService } from '../services/gear.service';
+import { KilometersService } from '../services/kilometers.service';
+import { Monthly } from '../models/monthly.model';
+import { RoutesService } from '../services/routes.service';
 
 @Component({
   selector: 'app-home',
@@ -29,15 +30,15 @@ summaryGears: Gear[]=[];
 kilometers: Distance[]=[];
 kilometersMonthly: Monthly[]=[];
 private subscription: Subscription;
-  constructor(private gearService: GearService, private dataStorageService: DataStorageService, private kilometersService: KilometersService) { }
+  constructor(private routesService:RoutesService, private gearService: GearService, private dataStorageService: DataStorageService, private kilometersService: KilometersService) { }
 
   ngOnInit(): void {
-    this.dataStorageService.getGears();
-    this.dataStorageService.getKilometers();
+    this.dataStorageService.getRoutes();
     this.kilometersService.addKilometersMonthly(); // to będzie zzerac duzo pamieci, przenies gdzies zeby sie robilo tylko raz
     this.kilometersMonthly=this.kilometersService.kilometersMonthly;
     this.gears = this.gearService.gears;
     this.summaryGears = this.gearService.gears;
+    this.routesService.getWeatherData();
 
     for(let i=0; i<this.gearService.gears.length ; i++)
     {

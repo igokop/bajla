@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../services/auth.service";
 import { User } from "./user.model";
 import {environment} from "../../environments/environment"
 export interface AuthResponseData {
@@ -100,10 +100,11 @@ export class AuthentService {
     }
 
     logout(){
+        localStorage.removeItem('userData');
         this.user.next(null); 
         this.router.navigate(['/']);
         this.authService.logout();
-        localStorage.removeItem('userData');
+        
         if(this.tokenExpirationTimer)
         {
             this.tokenExpirationTimer = null;

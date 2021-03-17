@@ -19,7 +19,7 @@
         <input type="text" formControlName="intervalEdit" class="form-control" />
         <span class="help-block" *ngIf="!gearFormEdit.get('intervalEdit').valid && gearFormEdit.get('intervalEdit').touched">Please enter a valid interval!</span>
     </div>
-  <button type="submit" class="btn btn-dark" [disabled]="!gearFormEdit.valid">Save changes</button>
-  <button class="btn btn-dark" (click)="clear()">Clear</button>
+  <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" class="btn btn-dark" [disabled]="!gearFormEdit.valid">Save changes</button>
+  <button style="color: rgb(14, 20, 15, 0.7); background-color:white" class="btn btn-dark" (click)="clear()">Clear</button>
   
 </form>

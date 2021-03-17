@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Gear } from 'src/app/gear.model';
+import { Gear } from 'src/app/models/gear.model';
 
 @Component({
   selector: 'app-gear-clicked',
@@ -11,7 +11,7 @@ import { Gear } from 'src/app/gear.model';
       transition('void => *', [
         style({
           opacity: '0',
-          transform: 'translateX(-100px)'
+          transform: 'translateY(-100px)'
         }),
         animate(400)
     ])

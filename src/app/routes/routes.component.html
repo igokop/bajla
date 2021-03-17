@@ -1,0 +1,176 @@
+<div [@list] class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4" *ngIf="routes.length === 0">
+            <hr>
+            <div style="background-color: rgb(14, 20, 15, 0.7); color: white; border-radius:10px;">
+                Click <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
+                add_road</span> to add new route!
+            </div>
+    </div>
+        <div class="col-xs-12 col-sm-4" *ngIf="routes.length !== 0">
+            <hr>
+            <app-alert-info style="background-color: rgb(14, 20, 15, 0.7); color:white" (close)="closeIt()" (delete)="deleteIt()" *ngIf="alertOpen" [message]="('wait for points')">
+                <ul style="background-color: rgb(14, 20, 15, 0); color:white" class="list-group" *ngFor="let point of points">
+                    <a style="background-color: rgb(14, 20, 15, 0); color:white">
+                        <span style="color:white" class="material-icons" *ngIf="!point.comeBack">
+                            arrow_circle_up
+                        </span>
+                        <span style="color:white" class="material-icons" *ngIf="point.comeBack">
+                            arrow_circle_down
+                        </span>
+                        <p style="font-size: 25px; color:white">{{ point.name }}</p>
+                        <p style="color:white" class="help-block">{{point.windSpeed}} km/h</p>
+                        <p style="color:white" class="help-block">Recomendation:</p>
+                        <div class="progress" style="height: 1px;" *ngIf="point.windSpeed < 10">
+                            <div class="progress-bar" role="progressbar" style="background:rgb(0, 255, 0); width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="progress" style="height: 1px;" *ngIf="point.windSpeed > 10">
+                            <div class="progress-bar" role="progressbar" style="background:rgb(255, 0, 0); width: {{ point.correct }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                </ul>
+            </app-alert-info>
+            <ul class="list-group" *ngFor="let route of routes; let i=index">
+                <a 
+                style="background-color: rgb(14, 20, 15,0.8); color:white;"
+                class="list-group-item clearfix">
+                    <div>
+                        <h3>{{ route.name }}
+                            <span class="material-icons" style="padding-right: 5px" [ngStyle]="route.correct === 1 && {'color':'green'} || route.correct === 2 && {'color':'orange'} || route.correct === 3 && {'color':'red'}">
+                                alt_route
+                            </span>
+                            <span class="material-icons" (click)="viewPoints(i)" style="padding-right: 5px; cursor:pointer">
+                                info
+                            </span>
+                        </h3>
+                        <p class="help-block"> <span class="material-icons">
+                            thermostat
+                        </span> {{ route.temperature }} &deg;C
+                        <span class="material-icons">
+                            air
+                        </span> {{ route.avgSpeed }} km/h</p>
+                    </div>
+                </a>
+            </ul>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+            <hr>
+            <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
+                <h4 style="text-align: center;">Today</h4>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    thermostat
+                </span>   {{ forecastToday.temp.day }} &deg;C </p>
+                <p style="color:white" class="help-block">
+                    <span class="material-icons">
+                        air
+                    </span>  {{ forecastToday.wind_speed }} km/h</p>
+                    <p style="color:white" class="help-block">
+                        <span class="material-icons">
+                            directions
+                        </span>  {{ forecastToday.wind_deg }}</p>
+                        <p style="color:white" class="help-block"> <span class="material-icons">
+                            cloud
+                        </span> {{ forecastToday.clouds }} %</p>
+                        <p style="color:white" class="help-block">
+                            <span class="material-icons">
+                                opacity
+                            </span>  {{ forecastToday.rain }} mm/h</p>
+                        </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2">
+                        <hr>
+            <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
+                <h4 style="text-align: center;">Tomorrow</h4>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    thermostat
+                </span>  {{ forecastTomorrow.temp.day }} &deg;C </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    air
+                </span>  {{ forecastTomorrow.wind_speed }} km/h</p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    directions
+                </span>  {{ forecastTomorrow.wind_deg }}</p>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    cloud
+                </span>  {{ forecastTomorrow.clouds }} % </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    opacity
+                </span>  {{ forecastTomorrow.rain }} mm/h</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+            <hr>
+            <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
+                <h4 style="text-align: center;">{{ ttomorrow | date: 'EEEE' }}</h4>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    thermostat
+                </span>  {{ forecastTTomorrow.temp.day }} &deg;C </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    air
+                </span>  {{ forecastTTomorrow.wind_speed }} km/h</p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    directions
+                </span>  {{ forecastTTomorrow.wind_deg }}</p>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    cloud
+                </span>  {{ forecastTTomorrow.clouds }} % </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    opacity
+                </span>  {{ forecastTTomorrow.rain }} mm/h</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+            <hr>
+            <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
+                <h4 style="text-align: center;">{{ tttomorrow | date: 'EEEE' }}</h4>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    thermostat
+                </span>  {{ forecastTTTomorrow.temp.day }} &deg;C </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    air
+                </span>  {{ forecastTTTomorrow.wind_speed }} km/h</p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    directions
+                </span>  {{ forecastTTTomorrow.wind_deg }}</p>
+                <p style="color:white" class="help-block"> <span class="material-icons">
+                    cloud
+                </span>  {{ forecastTTTomorrow.clouds }} % </p>
+                <p style="color:white" class="help-block">
+                <span class="material-icons">
+                    opacity
+                </span>  {{ forecastTTTomorrow.rain }} mm/h</p>
+            </div>
+        </div>
+       
+    </div>
+</div>
+<mat-toolbar style="position: fixed; bottom:0%; background-color: rgb(14, 20, 15,0.98); color: white;">
+    <p style="font-size: 12px;"><span class="material-icons" style="padding-right: 5px; font-size: 15px; color: green">
+        alt_route
+    </span>- Ride!</p>
+    <span style="width: 15px;"></span>
+    <p style="font-size: 12px;"><span class="material-icons" style="padding-right: 5px; font-size: 15px; color: orange">
+        alt_route
+    </span>- Think! </p>
+    <span style="width: 15px;"></span>
+    <p style="font-size: 12px;"><span class="material-icons" style="padding-right: 5px; font-size: 15px; color: red">
+        alt_route
+    </span>- Stay home! </p>
+    <span style="width: 99.5%;"></span>
+    <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
+        add_road
+    </span>
+    <!-- <span style="width: 15px;"></span>
+    <span class="material-icons" style="cursor: pointer; font-size: 40px; padding-right: 5px">
+        edit_road
+    </span> -->
+
+</mat-toolbar>

@@ -1,7 +1,7 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthentService } from './auth/authen.service';
-import { DataStorageService } from './data-storage-service';
+import { DataStorageService } from './services/data-storage-service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
       localStorage.clear();
       }
     }
-    
     this.AuthentService.autoLogin();
   }
   
