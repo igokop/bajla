@@ -6,7 +6,7 @@
                 Click <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
                 add_road</span> to add new route!
             </div>
-    </div>
+        </div>
         <div class="col-xs-12 col-sm-4" *ngIf="routes.length !== 0">
             <hr>
             <app-alert-info style="background-color: rgb(14, 20, 15, 0.7); color:white" (close)="closeIt()" (delete)="deleteIt()" *ngIf="alertOpen" [message]="('wait for points')">
@@ -30,7 +30,7 @@
                     </a>
                 </ul>
             </app-alert-info>
-            <ul class="list-group" *ngFor="let route of routes; let i=index">
+            <ul class="list-group" *ngFor="let route of routes; let i=index" >
                 <a 
                 style="background-color: rgb(14, 20, 15,0.8); color:white;"
                 class="list-group-item clearfix">
@@ -53,13 +53,13 @@
                 </a>
             </ul>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
+        <div class="col-xs-6 col-sm-4 col-md-2" *ngIf="routes && forecast">
             <hr>
             <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
                 <h4 style="text-align: center;">Today</h4>
                 <p style="color:white" class="help-block"> <span class="material-icons">
                     thermostat
-                </span>   {{ forecastToday.temp.day }} &deg;C </p>
+                </span>   {{ todayTemperature }} &deg;C </p>
                 <p style="color:white" class="help-block">
                     <span class="material-icons">
                         air
@@ -76,14 +76,14 @@
                                 opacity
                             </span>  {{ forecastToday.rain }} mm/h</p>
                         </div>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-md-2">
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2" *ngIf="routes && forecast">
                         <hr>
             <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
                 <h4 style="text-align: center;">Tomorrow</h4>
                 <p style="color:white" class="help-block"> <span class="material-icons">
                     thermostat
-                </span>  {{ forecastTomorrow.temp.day }} &deg;C </p>
+                </span>  {{ tomorrowTemperature }} &deg;C </p>
                 <p style="color:white" class="help-block">
                 <span class="material-icons">
                     air
@@ -101,13 +101,13 @@
                 </span>  {{ forecastTomorrow.rain }} mm/h</p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
+        <div class="col-xs-6 col-sm-4 col-md-2" *ngIf="routes && forecast">
             <hr>
             <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
                 <h4 style="text-align: center;">{{ ttomorrow | date: 'EEEE' }}</h4>
                 <p style="color:white" class="help-block"> <span class="material-icons">
                     thermostat
-                </span>  {{ forecastTTomorrow.temp.day }} &deg;C </p>
+                </span>  {{ ttomorrowTemperature }} &deg;C </p>
                 <p style="color:white" class="help-block">
                 <span class="material-icons">
                     air
@@ -125,13 +125,13 @@
                 </span>  {{ forecastTTomorrow.rain }} mm/h</p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-4 col-md-2">
+        <div class="col-xs-6 col-sm-4 col-md-2" *ngIf="routes && forecast">
             <hr>
             <div style="background-color: rgb(14, 20, 15,0.8); color:white; height: 50%; width:100%; border-radius:10px">
                 <h4 style="text-align: center;">{{ tttomorrow | date: 'EEEE' }}</h4>
                 <p style="color:white" class="help-block"> <span class="material-icons">
                     thermostat
-                </span>  {{ forecastTTTomorrow.temp.day }} &deg;C </p>
+                </span>  {{ tttomorrowTemperature }} &deg;C </p>
                 <p style="color:white" class="help-block">
                 <span class="material-icons">
                     air
@@ -168,9 +168,4 @@
     <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
         add_road
     </span>
-    <!-- <span style="width: 15px;"></span>
-    <span class="material-icons" style="cursor: pointer; font-size: 40px; padding-right: 5px">
-        edit_road
-    </span> -->
-
 </mat-toolbar>

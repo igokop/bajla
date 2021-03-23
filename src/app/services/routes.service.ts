@@ -1,32 +1,32 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Route } from '../models/route.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoutesService {
+  @Output()routesUpdate: EventEmitter<any> = new EventEmitter();
+  @Output()forecastUpdate: EventEmitter<any> = new EventEmitter();
   forecast: any;
   cityNameForecast = 'Wroclaw';
   routes: Route[]=[];
   constructor(private http: HttpClient) { }
 
-
-  getWeatherData(){
+  getForecastData(){
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=51.1&lon=17.0333&exclude=hourly&appid=5e37c2fbddf98133163d1f3b26ca7ba4')
         .then(response => response.json())
         .then(data => {
-          this.forecast = data; 
+          this.forecast = data;
+          this.forecastUpdate.emit(this.forecast);
         });
+  }
+
+
+  getWeatherData(){
     for(let i=0; i<this.routes.length; i++)
     {
       this.routes[i].avgSpeed = 0;
-      const cityName = this.routes[i].points[0].name;
-        fetch('https://api.openweathermap.org/data/2.5/weather?q='+ cityName +'&appid=5e37c2fbddf98133163d1f3b26ca7ba4')
-        .then(response => response.json())
-        .then(data => {
-          this.setWeatherRoutes(data, i);
-        });
       for(let j=0; j<this.routes[i].points.length; j++)
       {
         const cityName = this.routes[i].points[j].name;
@@ -34,11 +34,12 @@ export class RoutesService {
         .then(response => response.json())
         .then(data => {
           this.setWeatherPoints(data, i, j);
+          if(j === this.routes[i].points.length-1)
+          {
+            this.avgSpeed(i);
+          }
         });
       }
-      setTimeout(() => {
-        this.avgSpeed(i); 
-        }, 200);
     }
   }
   
@@ -72,11 +73,6 @@ export class RoutesService {
       this.routes[i].avgSpeed = this.routes[i].avgSpeed + this.routes[i].points[j].windSpeed;
   }
 
-  setWeatherRoutes(data: any, i: number){
-    this.routes[i].temperature = data.main.temp -273;
-    this.routes[i].temperature = Math.round(this.routes[i].temperature *10)/10.0;
-  }
-
   go(){
     for(let i=0;i<this.routes.length; i++){
       let backwards: number=0;
@@ -102,6 +98,7 @@ export class RoutesService {
         aheadI = 0;
       }
     }
+    this.routesUpdate.emit(this.routes);
   }
   avgSpeed(i: number){
     this.routes[i].avgSpeed = (this.routes[i].avgSpeed/this.routes[i].points.length);
@@ -115,9 +112,6 @@ export class RoutesService {
 
   getRoutes(){
     return this.routes;
-  }
-  getRoutesFromServer(routes){ 
-    this.routes = routes;
   }
 
   deleteRoute(i:number){
