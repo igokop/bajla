@@ -1,22 +1,22 @@
 <form [formGroup]="gearFormEdit" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label>Name</label>
-        <input type="text" formControlName="nameEdit" class="form-control"/>
+        <input style="font-size:16px" type="text" formControlName="nameEdit" class="form-control"/>
         <span class="help-block" *ngIf="!gearFormEdit.get('nameEdit').valid && gearFormEdit.get('nameEdit').touched">Please enter a valid name!</span>
     </div>
     <div class="form-group">
         <label>Date of replace</label>
-        <input type="date" formControlName="dateEdit" class="form-control" />
+        <input style="font-size:16px" type="date" formControlName="dateEdit" class="form-control" />
         <span class="help-block" *ngIf="!gearFormEdit.get('dateEdit').valid && gearFormEdit.get('dateEdit').touched">Please choose a valid date!</span>
     </div>
     <div class="form-group">
         <label>Mileage on replacing day</label>
-        <input type="text" formControlName="actualDistanceEdit" class="form-control" />
+        <input style="font-size:16px" type="text" formControlName="actualDistanceEdit" class="form-control" />
         <span class="help-block" *ngIf="!gearFormEdit.get('actualDistanceEdit').valid && gearFormEdit.get('actualDistanceEdit').touched">Please enter a valid actual distance!</span>
     </div>
     <div class="form-group">
         <label>Interval</label>
-        <input type="text" formControlName="intervalEdit" class="form-control" />
+        <input style="font-size:16px" type="text" formControlName="intervalEdit" class="form-control" />
         <span class="help-block" *ngIf="!gearFormEdit.get('intervalEdit').valid && gearFormEdit.get('intervalEdit').touched">Please enter a valid interval!</span>
     </div>
   <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" class="btn btn-dark" [disabled]="!gearFormEdit.valid">Save changes</button>

@@ -41,12 +41,12 @@
           <form [formGroup]="dailyDistance" (ngSubmit)="onSubmit()">
               <div class="form-group">
                   <label>Date</label>
-                  <input type="date" formControlName="date" class="form-control"/>
+                  <input style="font-size:16px" type="date" formControlName="date" class="form-control"/>
                   <span class="help-block" *ngIf="!dailyDistance.get('date').valid && dailyDistance.get('date').touched">Please select valid date!</span>
               </div>
               <div class="form-group">
                   <label>Distance</label>
-                  <input type="number" formControlName="distance" class="form-control" />
+                  <input style="font-size:16px" type="number" formControlName="distance" class="form-control" />
                   <span class="help-block" *ngIf="!dailyDistance.get('distance').valid && dailyDistance.get('distance').touched">Please enter valid distance!</span>
               </div>
             <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" class="btn btn-outline-dark" [disabled]="!dailyDistance.valid">Report</button>
