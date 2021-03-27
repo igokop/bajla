@@ -1,0 +1,42 @@
+<app-alert-pay style="text-align: center" *ngIf="sinceLoading" (close)="closeIt()">
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+    <h3 *ngIf="!loading && submitted">Thank you!</h3>
+    <h3 *ngIf="!loading && !submitted">Something went wrong. Please try again</h3>
+</app-alert-pay>
+<app-alert-pay *ngIf="test" (close)="closeTest()">
+    <h4>Card for tests:</h4>
+    <h5>4242 4242 4242 4242</h5>
+    <h5>42/42</h5>
+    <h5>424</h5>
+    <h5>42424</h5>
+</app-alert-pay>
+<div style="width:70%; position:relative; left:15%; color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+            Donate me
+            <span class="material-icons" (click)="closeTest()" style="padding-right: 5px; cursor:pointer">
+                info
+            </span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+            <input type="radio" formControlName="amount" value="5" > 5€
+            <input type="radio" formControlName="amount" value="10" > 10€
+            <input type="radio" formControlName="amount" value="15" > 15€
+            <input style="color:rgb(14, 20, 15, 0.7);" type="text" class="form-control" formControlName="name" placeholder="Full name*">
+            <ngx-stripe-card
+                [options]="cardOptions"
+                [elementsOptions]="elementsOptions"
+            ></ngx-stripe-card>
+            <button [disabled]="!stripeTest.valid" class="btn btn-outline-dark" style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit">
+                Donate
+            </button>
+        </form>
+    </div>
+</div>
+<div *ngIf="donators" style="width:70%; position:relative; left:15%; color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
+    <ul style="background-color:rgba(59, 146, 74, 0.0); color:white" class="list-group-item clearfix" *ngFor="let don of donators">
+        <h5>{{ don.name }} paid {{don.amount}}€</h5>
+    </ul>
+</div>

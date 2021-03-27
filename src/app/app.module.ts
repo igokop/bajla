@@ -47,6 +47,9 @@ import { SimpleComponent } from './routes/add-route/simple/simple.component';
 import { RoutesService } from './services/routes.service';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser'
 import * as Hammer from 'hammerjs';
+import { NgxStripeModule } from 'ngx-stripe';
+import { StripeCreateTokenComponent } from './stripe-create-token/stripe-create-token.component';
+import { AlertPayComponent } from './alerts/alert-pay/alert-pay.component';
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
@@ -67,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'createNewRoute', component: AddRouteComponent},
   { path: 'simpleWay', component: SimpleComponent},
   { path: 'kilometers', canActivate: [AuthGuard],component: AddKilometersComponent },
+  { path: 'subscription', canActivate: [AuthGuard],component: StripeCreateTokenComponent },
   { path: 'gears', canActivate: [AuthGuard], component: MyGearsComponent, children: [
     {path:':id', component: GearClickedComponent}, ]}
   
@@ -91,7 +95,9 @@ const appRoutes: Routes = [
     AddRouteComponent,
     AlertInfoComponent,
     AlertComponent,
-    SimpleComponent
+    SimpleComponent,
+    StripeCreateTokenComponent,
+    AlertPayComponent
     
   ],
   imports: [
@@ -112,7 +118,8 @@ const appRoutes: Routes = [
     MatListModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    HammerModule
+    HammerModule,
+    NgxStripeModule.forRoot('pk_test_51IYxfyC4X84AfpFj1Z9TBhDke2AfVKbYHoJha9Ny5LyugUnmmuszRuGQlpGrxJROy9y56vFu4ruGiaU37YDkYoMM00HsNOd3rk')
   ],
   providers: [KilometersService, SummaryService, GearService, AuthGuard, AuthService, RoutesService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInteceptorService, multi: true},{provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}],
   bootstrap: [AppComponent],

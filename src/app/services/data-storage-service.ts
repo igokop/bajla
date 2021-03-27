@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable, Output } from "@angular/core";
 import { Distance } from "../models/distance.model";
 import { Gear } from "../models/gear.model";
 import { GearService } from "./gear.service";
@@ -12,7 +12,8 @@ import { Route } from "../models/route.model";
 @Injectable()
 export class DataStorageService{    
     constructor(private routesService: RoutesService, private http: HttpClient, private kilometersService: KilometersService, private gearService: GearService, private authentService: AuthentService){}
-    
+    @Output() getDonation: EventEmitter<any> = new EventEmitter();
+
     storeKilometers(){
         this.authentService.user.subscribe(user => {
             const distance = this.kilometersService.getDistance();
@@ -67,6 +68,16 @@ export class DataStorageService{
         this.authentService.user.subscribe(user => {
             const routes = this.routesService.getRoutes();
         this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/'+ user.id +'/routes.json', routes).subscribe(response=>{console.log(response)});
+        })
+    }
+
+    storeDonations(donators){
+        this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/donations.json', donators).subscribe(response=>{console.log(response)});
+    }
+
+    getDonations(){
+        this.http.get('https://bajla-bike-default-rtdb.firebaseio.com/donations.json').subscribe(donators =>{
+            this.getDonation.emit(donators);
         })
     }
 

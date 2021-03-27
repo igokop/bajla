@@ -34,6 +34,8 @@ export class RoutesService {
         .then(response => response.json())
         .then(data => {
           this.setWeatherPoints(data, i, j);
+          this.routes[i].temperature = data.main.temp - 273;
+          this.routes[i].temperature = Math.round(this.routes[i].temperature*10)/10.0;
           if(j === this.routes[i].points.length-1)
           {
             this.avgSpeed(i);

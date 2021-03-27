@@ -49,7 +49,6 @@ export class RoutesComponent implements OnInit {
     })
     this.routesService.routesUpdate.subscribe(routes => {
       this.routes = routes;
-      console.log(this.routes.length);
     });
   }
 

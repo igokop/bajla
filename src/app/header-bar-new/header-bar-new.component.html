@@ -13,6 +13,7 @@
       <span style="cursor:pointer; font-size: 54px;" class="material-icons">account_circle</span>
       <h4>{{userData.email}}</h4>
       <hr>
+      <p style="cursor:pointer" routerLink="/subscription" (click)="changeAlertState()">Donation</p>
       <p style="cursor:pointer" (click)="logOut()">Log out</p>
     </app-alert>
     <mat-toolbar style="position: fixed; z-index: 1; background-color: rgb(14, 20, 15, 0.85); color: white;">
