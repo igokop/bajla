@@ -45,8 +45,9 @@
                             </div>
                         </div>
                         
-                        <span style="font-size: 35px; cursor:pointer;" class="material-icons" (click)="onSubmit()">send</span>
                         <!-- <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" [disabled]="!newSimpleRoute.valid" class="btn">Add</button> -->
+                        <hr>
+                        <button [disabled]="!newSimpleRoute.valid" class="btn btn-dark" style="color: white; background-color:rgb(14, 20, 15, 0.7);" (click)="onSubmit()">ADD</button>
                     </form>
                     
                     

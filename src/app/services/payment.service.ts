@@ -14,7 +14,6 @@ export class paymentService {
         'Content-type': 'application/json'
       })
     }
-    // return this.http.post("https://mailforphotography.herokuapp.com/feed/posts", body, headers);
-    return this.http.post("http://localhost:8080/feed/posts", body, headers);
+    return this.http.post("https://payments-for-bajla.herokuapp.com/feed/posts", body, headers);
   }
 }

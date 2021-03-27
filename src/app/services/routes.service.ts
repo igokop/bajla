@@ -117,7 +117,7 @@ export class RoutesService {
   }
 
   deleteRoute(i:number){
-    this.routes.splice(i-1, 1);
+    this.routes.splice(i, 1);
   }
 }
 
