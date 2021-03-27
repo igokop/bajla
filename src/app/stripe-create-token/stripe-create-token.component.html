@@ -35,7 +35,7 @@
         </form>
     </div>
 </div>
-<div *ngIf="donators" style="width:70%; position:relative; left:15%; color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
+<div *ngIf="donators" style="width:100%; position:relative; left:15%; color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
     <ul style="background-color:rgba(59, 146, 74, 0.0); color:white" class="list-group-item clearfix" *ngFor="let don of donators">
         <h5>{{ don.name }} paid {{don.amount}}€</h5>
     </ul>
