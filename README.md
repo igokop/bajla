@@ -10,6 +10,7 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Checking actual and forecast weather conditions</li>
     <li>Ability to donate developer by payment service</li>
     <li>Create account, log in, auto log in</li>
+    <li>Using gesturesli>
 </ul>
 
 <h1>Used technologies</h1>
@@ -22,6 +23,7 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Heroku</li>
     <li>Stripe</li>
     <li>OpenWeatherMap</li>
+    <li>Hammer.js</li>
 </ul>
 
 <h1>Check it out</h1>
