@@ -10,7 +10,7 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Checking actual and forecast weather conditions</li>
     <li>Ability to donate developer by payment service</li>
     <li>Create account, log in, auto log in</li>
-    <li>Using gesturesli>
+    <li>Using gestures</li>
 </ul>
 
 <h1>Used technologies</h1>
