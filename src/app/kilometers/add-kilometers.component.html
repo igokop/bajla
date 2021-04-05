@@ -22,7 +22,7 @@
 <div class="container" [@list]>
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-    <button mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" (click) = "show()">Add distance</button>
+    <button class="add-button" mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" (click) = "show()">Add distance</button>
     <button mat-stroked-button style="color: white; background-color:rgb(14, 20, 15, 0.7)" (click)="activeDeleting()">Delete</button>
     <div *ngIf="deletingAllow" class="help-block">Click position to delete it!</div>
     </div>

@@ -29,7 +29,7 @@ export class AddKilometersComponent implements OnInit, OnChanges {
   deletingAllow: boolean = false;
   alertClosed: boolean = false;
   i: number;
-  private subscription: Subscription; //subskrypcja - wymagana zeby dane z serwera byly swieze
+  // private subscription: Subscription;
   constructor(private kilometersService: KilometersService, private dataStorageService: DataStorageService){};
 
 
@@ -57,12 +57,13 @@ export class AddKilometersComponent implements OnInit, OnChanges {
       'date': new FormControl(null, Validators.required),
       'distance': new FormControl(null, Validators.required)
     })
-    this.subscription = this.kilometersService.kilometersChanged //subskrypcja - wymagana zeby dane z serwera byly swieze
+    this.kilometersService.kilometersChanged //subskrypcja - wymagana zeby dane z serwera byly swieze
       .subscribe(
         (kilometers: Distance[]) => {
           this.kilometers = kilometers;
         }
       );
+      
   }
   
   ngOnChanges(){
