@@ -22,6 +22,7 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Heroku</li>
     <li>Stripe</li>
     <li>OpenWeatherMap</li>
+    <li>Hammer.js</li>
 </ul>
 
 <h1>Check it out</h1>
