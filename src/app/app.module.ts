@@ -63,7 +63,7 @@ export class HammerConfig extends HammerGestureConfig {
   }
 }
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: 'home', canActivate: [AuthGuard],component: HomeComponent,resolve: [KilometersResolverService, GearResolverService] },
   { path: '', component: AuthComponent},
   { path: 'routes', canActivate: [AuthGuard], component: RoutesComponent},
