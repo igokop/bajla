@@ -1,5 +1,5 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" [@list] style="background-color: rgb(14, 20, 15,0.3); color:white;">
-
+<table mat-table [dataSource]="dataSource.filteredData|slice:0:13" matSort class="mat-elevation-z8" [@list] style="background-color: rgb(14, 20, 15,0.3); color:white;">
+ 
   <!-- Position Column -->
   <ng-container matColumnDef="date" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="color: white;"> Date of training</th>

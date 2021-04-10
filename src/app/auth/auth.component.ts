@@ -1,7 +1,7 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { AuthentService, AuthResponseData } from './authen.service';
@@ -17,9 +17,14 @@ loginMode = true;
 isLoading = false;
 error: string = null;
 
-  constructor(private authentService: AuthentService, private router: Router, private authService: AuthService) { }
+  constructor(private route:ActivatedRoute ,private authentService: AuthentService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if(userData){
+      console.log('przekierowalem!')
+      this.router.navigate(['home'], {relativeTo: this.route});
+    }
     this.loginData = new FormGroup({
       'email': new FormControl(null, [Validators.email, Validators.required]),
       'password': new FormControl(null, Validators.required)

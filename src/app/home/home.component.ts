@@ -34,10 +34,11 @@ private subscription: Subscription;
 
   ngOnInit(): void {
     this.dataStorageService.getRoutes();
-    this.kilometersService.addKilometersMonthly(); // to będzie zzerac duzo pamieci, przenies gdzies zeby sie robilo tylko raz
+    this.kilometersService.addKilometersMonthly();
     this.kilometersMonthly=this.kilometersService.kilometersMonthly;
     this.gears = this.gearService.gears;
     this.summaryGears = this.gearService.gears;
+    this.dataStorageService.getPhoto();
     this.routesService.getWeatherData();
 
     for(let i=0; i<this.gearService.gears.length ; i++)

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentService } from './auth/authen.service';
 import { DataStorageService } from './services/data-storage-service';
 import { RoutesService } from './services/routes.service';
+import { StravaService } from './services/strava.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { RoutesService } from './services/routes.service';
 })
 export class AppComponent implements OnInit {
   title = 'bajla';
-  constructor(private routesService: RoutesService, private dataStorageService: DataStorageService, private AuthentService: AuthentService){}
+  constructor(private stravaService: StravaService ,private routesService: RoutesService, private dataStorageService: DataStorageService, private AuthentService: AuthentService){}
   
   ngOnInit(){
     this.routesService.getForecastData();

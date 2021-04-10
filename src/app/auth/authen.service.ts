@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
@@ -22,7 +22,7 @@ export class AuthentService {
     user = new BehaviorSubject<User>(null);
     private tokenExpirationTimer: any;
 
-    constructor(private http:HttpClient, private router:Router, private authService: AuthService){}
+    constructor(private http:HttpClient, private router:Router, private authService: AuthService, private route: ActivatedRoute){}
 
     signUp(email: string, password: string){
         return this.http.post<AuthResponseData>(
@@ -96,7 +96,11 @@ export class AuthentService {
             const expirationDuration = new Date (userData._tokenExpirationDate).getTime() - new Date().getTime();
             this.autoLogout(expirationDuration);
         }
-        this.router.navigate(['/home']);
+        // if(this.route.url._value[0].path = null){
+        //     this.router.navigate(['home'], {relativeTo: this.route});
+        // }else if(this.route.url._value[0].path != null){
+        //     this.router.navigate([''], {relativeTo: this.route});
+        // }
     }
 
     logout(){

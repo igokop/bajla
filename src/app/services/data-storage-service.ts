@@ -13,7 +13,7 @@ import { Route } from "../models/route.model";
 export class DataStorageService{    
     constructor(private routesService: RoutesService, private http: HttpClient, private kilometersService: KilometersService, private gearService: GearService, private authentService: AuthentService){}
     @Output() getDonation: EventEmitter<any> = new EventEmitter();
-
+    @Output() getPhotos: EventEmitter<any> = new EventEmitter();
     storeKilometers(){
         this.authentService.user.subscribe(user => {
             const distance = this.kilometersService.getDistance();
@@ -22,6 +22,12 @@ export class DataStorageService{
         // const userData = JSON.parse(localStorage.getItem('userData'));
         // const distance = this.kilometersService.getDistance();
         // this.http.put('https://ng-complete-guide-cd0cd-default-rtdb.firebaseio.com/' + userData.id + '/distance.json', distance).subscribe(response=>{console.log(response)});
+    }
+    storeKilometersStrava(distance){
+        // console.log(distance);
+        this.authentService.user.subscribe(user => {
+            this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/' + user.id + '/distance.json', distance).subscribe(response=>{console.log(response)});
+        })
     }
 
     storeGears(){
@@ -79,6 +85,21 @@ export class DataStorageService{
         this.http.get('https://bajla-bike-default-rtdb.firebaseio.com/donations.json').subscribe(donators =>{
             this.getDonation.emit(donators);
         })
+    }
+
+    storePhoto(url){
+        this.authentService.user.subscribe(user => {
+            const something = JSON.stringify(url)
+            this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/'+ user.id +'/photo.json', url).subscribe(response=>{});
+        })
+    }
+    getPhoto(){
+        const userData =JSON.parse(localStorage.getItem('userData'));
+        this.http.get('https://bajla-bike-default-rtdb.firebaseio.com/'+ userData.id + '/photo.json').subscribe(photo=>{
+        if(photo){
+            this.getPhotos.emit(photo);
+        }
+        });
     }
 
 

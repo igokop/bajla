@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { DataStorageService } from '../services/data-storage-service';
 import { AuthentService } from '../auth/authen.service';
 import { Router } from '@angular/router';
+import { StravaService } from '../services/strava.service';
 
 @Component({
   selector: 'app-header-bar-new',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header-bar-new.component.css']
 })
 export class HeaderBarNewComponent implements OnInit{
+  photo:any;
   logged = false;
   openedAlert = false;
   userDataEmail: string;
@@ -23,7 +25,7 @@ export class HeaderBarNewComponent implements OnInit{
       shareReplay()
     );
 
-  constructor(private router: Router, private breakpointObserver: BreakpointObserver,private authService: AuthService, private dataStorageService: DataStorageService, private authentService:AuthentService) {}
+  constructor(private stravaService: StravaService, private router: Router, private breakpointObserver: BreakpointObserver,private authService: AuthService, private dataStorageService: DataStorageService, private authentService:AuthentService) {}
   ngOnInit(): void {
     this.authentService.user.subscribe(user =>{
       if(user){
@@ -31,7 +33,13 @@ export class HeaderBarNewComponent implements OnInit{
       } else {
         this.logged = false;
       }
-    })
+    });
+    this.stravaService.stravaProfile.subscribe(data=>{
+      this.photo = data;
+      this.dataStorageService.storePhoto(data)})
+    this.dataStorageService.getPhotos.subscribe(photo =>{
+      this.photo=photo;
+      });
   }
 
   getUserData(){
@@ -72,7 +80,13 @@ export class HeaderBarNewComponent implements OnInit{
     if(this.router.url === '/kilometers'){
       this.router.navigate(['/routes']);
     }
-
+  }
+    
+    
+  stravaButton(){
+    window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=http://localhost:4200/exchange_token&approval_prompt=force&scope=activity:read_all", "_self");
+    // window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=http://bajla-bike.web.app/exchange_token&approval_prompt=force&scope=read", "_self");
+    // this.stravaService.getDataFromStrava();
   }
   
 }

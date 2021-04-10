@@ -10,10 +10,12 @@
   
   <mat-sidenav-content (swipeleft)=swipeLeft() (swiperight)=swipeRight()>
     <app-alert *ngIf="openedAlert" (close)="changeAlertState()">
-      <span style="cursor:pointer; font-size: 54px;" class="material-icons">account_circle</span>
+      <span *ngIf="!photo" style="cursor:pointer; font-size: 54px;" class="material-icons">account_circle</span>
+      <img style="height: 54px; border-radius:99px" *ngIf="photo" src="{{ photo.profile }}">
       <h4>{{userData.email}}</h4>
       <hr>
       <p style="cursor:pointer" routerLink="/subscription" (click)="changeAlertState()">Donation</p>
+      <p style="cursor:pointer" (click)="stravaButton()">Connect with Strava</p>
       <p style="cursor:pointer" (click)="logOut()">Log out</p>
     </app-alert>
     <mat-toolbar style="position: fixed; z-index: 1; background-color: rgb(14, 20, 15, 0.85); color: white;">
@@ -28,7 +30,8 @@
       <span style="width: 20px;"></span>
       <span style="cursor:pointer"routerLink="/routes" class="material-icons" [routerLinkActive]="'is-active'">alt_route</span>
       <span style="width: 20px;"></span>
-      <span style="cursor:pointer"class="material-icons" (click)="changeAlertState()" *ngIf="logged">account_circle</span>
+      <span style="cursor:pointer"class="material-icons" (click)="changeAlertState()" *ngIf="!photo && logged">account_circle</span>
+      <img style="height: 24px; border-radius:99px; cursor:pointer" (click)="changeAlertState()" *ngIf="photo && logged" src="{{ photo.profile }}">
       
     </mat-toolbar>
     <div style="height: 70px; width:100%;"></div>
