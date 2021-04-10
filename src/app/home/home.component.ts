@@ -24,44 +24,41 @@ import { RoutesService } from '../services/routes.service';
     ])
   ]),]
 })
-export class HomeComponent implements OnInit, OnDestroy {
-gears: Gear[]=[];
-summaryGears: Gear[]=[];
+export class HomeComponent implements OnInit {
+summaryGears: any[]=[];
 kilometers: Distance[]=[];
 kilometersMonthly: Monthly[]=[];
-private subscription: Subscription;
-  constructor(private routesService:RoutesService, private gearService: GearService, private dataStorageService: DataStorageService, private kilometersService: KilometersService) { }
+millage:number[]=[];
+  constructor(private routesService:RoutesService, private dataStorageService: DataStorageService, private gearService:GearService, private kilometersService: KilometersService) { }
 
   ngOnInit(): void {
     this.dataStorageService.getRoutes();
     this.kilometersService.addKilometersMonthly();
     this.kilometersMonthly=this.kilometersService.kilometersMonthly;
-    this.gears = this.gearService.gears;
-    this.summaryGears = this.gearService.gears;
+    this.summaryGears = this.gearService.getGear();
     this.dataStorageService.getPhoto();
     this.routesService.getWeatherData();
-
-    for(let i=0; i<this.gearService.gears.length ; i++)
+    
+    
+    for(let i=0; i<this.summaryGears.length ; i++)
     {
+      let km = 0;
       for(let j=0; j<this.kilometersService.kilometers.length; j++)
       { 
         const dataGear = new Date(this.summaryGears[i].buyDate);
         const dataDistance = new Date(this.kilometersService.kilometers[j].date);
         const timeGear=dataGear.getTime();
         const timeDistance=dataDistance.getTime();
-
+        
         if(timeGear < timeDistance){
-          this.summaryGears[i].kilometersAmmount=+this.summaryGears[i].kilometersAmmount + +this.kilometersService.kilometers[j].amount;
+           km = km + +this.kilometersService.kilometers[j].amount;
         }
       }
-      this.gearService.gears[i].procent = (this.gearService.gears[i].kilometersAmmount / this.gearService.gears[i].interval)*100;
-      this.gearService.gears[i].left = this.gearService.gears[i].interval - this.gearService.gears[i].kilometersAmmount;
+      this.millage.push(km);
+      this.summaryGears[i].procent = (this.millage[i] / this.summaryGears[i].interval)*100;
+      this.summaryGears[i].left = this.summaryGears[i].interval - this.millage[i];
     }
 
-  }
-  
-  ngOnDestroy(){
-    this.gearService = null;
   }
 
 

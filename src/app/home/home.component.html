@@ -18,7 +18,7 @@
                 <a  class="list-group-item" *ngFor="let gearEl of summaryGears; let i = index" [@list] style="background-color: rgb(14, 20, 15,0.8); color:white;">
                     
                         <h4>{{ gearEl.item }}</h4>
-                        <p>{{ gearEl.kilometersAmmount }} / {{gearEl.interval }} km</p>
+                        <p>{{ millage[i] }} / {{gearEl.interval }} km</p>
                         <div class="help-block">{{ gearEl.left }} kilometers left</div>
 
                     <!-- <span style="position: relative; left:64%; top:-100px">
