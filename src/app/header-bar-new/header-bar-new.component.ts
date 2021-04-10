@@ -84,8 +84,8 @@ export class HeaderBarNewComponent implements OnInit{
     
     
   stravaButton(){
-    window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=http://localhost:4200/exchange_token&approval_prompt=force&scope=activity:read_all", "_self");
-    // window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=http://bajla-bike.web.app/exchange_token&approval_prompt=force&scope=read", "_self");
+    // window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=http://localhost:4200/exchange_token&approval_prompt=force&scope=activity:read_all", "_self");
+    window.open("https://www.strava.com/oauth/authorize?client_id=64364&response_type=code&redirect_uri=https://bajla-bike.web.app/exchange_token&approval_prompt=force&scope=activity:read_all", "_self");
     // this.stravaService.getDataFromStrava();
   }
   

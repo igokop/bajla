@@ -45,19 +45,19 @@ export class GearService {
       this.gearChanged.next(this.gears.slice());
     }
     
-    //Dodajemy kilometry z dystansu do przebiegu naszych części:
-    //if (date1.getTime() > date2.getTime()) alert("bla");
-    synchro(){
-        for(let i=0; i<this.kilometersService.kilometers.length; i++){
-            for(let j=0; j<this.gears.length; j++){
-                if(Date.parse(this.kilometersService.kilometers[i].date) >= Date.parse(this.gears[j].buyDate)){
-                    this.gears[j].kilometersAmmount=(+this.gears[j].kilometersAmmount + +this.kilometersService.kilometers[i].amount);
-                    this.gearChanged.next(this.gears.slice());
-                }
+    // synchro(){
+    //     console.log('synchro poszla jak chuj')
+    //     for(let i=0; i<this.kilometersService.kilometers.length; i++){
+    //         for(let j=0; j<this.gears.length; j++){
+    //             this.gears[j].kilometersAmmount = 0;
+    //             if(Date.parse(this.kilometersService.kilometers[i].date) >= Date.parse(this.gears[j].buyDate)){
+    //                 this.gears[j].kilometersAmmount=(+this.gears[j].kilometersAmmount + +this.kilometersService.kilometers[i].amount);
+    //                 this.gearChanged.next(this.gears.slice());
+    //             }
                 
-            }
+    //         }
 
-        }this.gearChanged.next(this.gears.slice());
-    }
+    //     }this.gearChanged.next(this.gears.slice());
+    // }
     
   }

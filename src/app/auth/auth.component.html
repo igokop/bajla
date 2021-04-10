@@ -23,16 +23,18 @@
                     <!-- <span class="help-block" *ngIf="!dailyDistance.get('distance').valid && dailyDistance.get('distance').touched">Please enter valid distance!</span> -->
                 </div>
               <button type="submit" mat-stroked-button style="color: white;" [disabled]="!loginData.valid">{{ loginMode ? 'Log in' : 'Sign in' }}</button>
-              <p class="help-block" (click)="onSwitchMode()" style=" color:white; cursor:pointer;">{{ loginMode ? 'Click here to create account' : 'Click here to log in' }}</p>
+              <div>
+                  <a (click)="onSwitchMode()" style="cursor:pointer; font-size:20px">{{ loginMode ? 'Click here to create account' : 'Click here to log in' }}</a>
+              </div>
             </form>
         </div>
         <div class="col-xs-12 col-sm-7 " style="color:white;">
             <hr>
-            <h3><span class="material-icons">handyman</span> Monitoring gears usage</h3>
-            <h3><span class="material-icons">stacked_bar_chart</span> Storing daily distance</h3>
-            <h3><span class="material-icons">alt_route</span> Choosing route due to wind speed and direction</h3>
-            <h3><span class="material-icons">alt_route</span> Checking weather forecast</h3>
-            <h3><span class="material-icons">directions_bike</span> Integration with Strava</h3>
+            <h4><span class="material-icons">handyman</span> Monitoring gears usage</h4>
+            <h4><span class="material-icons">stacked_bar_chart</span> Storing daily distance</h4>
+            <h4><span class="material-icons">alt_route</span> Choosing route due to wind speed and direction</h4>
+            <h4><span class="material-icons">alt_route</span> Checking weather forecast</h4>
+            <h4><span class="material-icons">directions_bike</span> Integration with Strava</h4>
 
         </div>
     </div>

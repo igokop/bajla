@@ -1,25 +1,26 @@
 <div class="container" *ngIf="summaryGears.length === 0 || kilometersMonthly.length === 0">
     <div class="row">
         <div class="col-xs-12" style="background-color: rgb(14, 20, 15, 0.85); border-radius: 10px; color:white">
-            <h3><span style="font-size:45px" class="material-icons">handyman</span> Adding and monitoring gears usage. Gears mileage will be automatically updated by adding daily distance</h3>
-            <h3><span style="font-size:45px" class="material-icons">stacked_bar_chart</span> Adding and storing daily distance</h3>
-            <h3><span style="font-size:45px" class="material-icons">alt_route</span> Adding and choosing the best training route due to wind speed and direction. Route is highly recommended when average wind is lower than 10km/h and recommended if on the return is tailwind</h3>
-            <h3><span style="font-size:45px" class="material-icons">alt_route</span> Checking weather forecast due to location. Wroclaw is set for default</h3>
-            <h3><span style="font-size:45px" class="material-icons">swipe</span>Using gestures for navigate</h3>
+            <h4><span style="font-size:45px" class="material-icons">handyman</span> Adding and monitoring gears usage. Gears mileage will be automatically updated by adding daily distance</h4>
+            <h4><span style="font-size:45px" class="material-icons">stacked_bar_chart</span> Adding and storing daily distance</h4>
+            <h4><span style="font-size:45px" class="material-icons">alt_route</span> Adding and choosing the best training route due to wind speed and direction. Route is highly recommended when average wind is lower than 10km/h and recommended if on the return is tailwind</h4>
+            <h4><span style="font-size:45px" class="material-icons">alt_route</span> Checking weather forecast due to location. Wroclaw is set for default</h4>
+            <h4><span style="font-size:45px" class="material-icons">swipe</span>Using gestures for navigate</h4>
         </div>
     </div>
 </div>
 <div class="container" *ngIf="summaryGears.length !== 0 || kilometersMonthly.length !== 0">
     <div class="row">
         <div class="col-xs-12 col-sm-5" >
-            <hr>
+            <h4 [@list] style="color:white">Your gears</h4>
+            <hr [@list]>
             <ul *ngIf="summaryGears.length > 0" class="list-group" style="background-color: rgba(255, 255, 255, 0);">
                 <a  class="list-group-item" *ngFor="let gearEl of summaryGears; let i = index" [@list] style="background-color: rgb(14, 20, 15,0.8); color:white;">
                     
                         <h4>{{ gearEl.item }}</h4>
                         <p>{{ gearEl.kilometersAmmount }} / {{gearEl.interval }} km</p>
                         <div class="help-block">{{ gearEl.left }} kilometers left</div>
-                        
+
                     <!-- <span style="position: relative; left:64%; top:-100px">
                         <mat-spinner class="track" mode="determinate" value="100"></mat-spinner>
                         <mat-spinner mode="determinate" value="{{gearEl.procent}}"></mat-spinner>
@@ -31,12 +32,14 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-4">
-            <hr>
+            <h4 [@list] style="color:white">Daily</h4>
+            <hr [@list]>
             <app-distance-table *ngIf="kilometersMonthly.length > 0"></app-distance-table>
         </div>
         
         <div class="col-xs-12 col-sm-3">
-            <hr>
+            <h4 [@list] style="color:white">Monthly</h4>
+            <hr [@list]>
             <app-distance-monthly-table *ngIf="kilometersMonthly.length > 0"></app-distance-monthly-table>
         </div>
     </div>

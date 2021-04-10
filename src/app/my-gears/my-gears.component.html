@@ -8,7 +8,8 @@
                 *ngFor="let gearEl of gears; let i = index"
                 [index]="i"
                 [gear]="gearEl"
-                (click)="show2(i)">
+                (click)="show2(i)"
+                [disabled]="!editable && !deletable">
             </app-gear-clicked>
             </ul>
         <h3 [@list] *ngIf="gears.length === 0" style="color: white;">Click Add gear!</h3>
