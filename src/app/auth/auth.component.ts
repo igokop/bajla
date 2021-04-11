@@ -22,7 +22,6 @@ error: string = null;
   ngOnInit(): void {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if(userData){
-      console.log('przekierowalem!')
       this.router.navigate(['home'], {relativeTo: this.route});
     }
     this.loginData = new FormGroup({
