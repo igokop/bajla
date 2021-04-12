@@ -9,6 +9,7 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Creating routes and choosing the best one due to actual weather</li>
     <li>Checking actual and forecast weather conditions</li>
     <li>Ability to donate developer by payment service</li>
+    <li>Integration with Strava</li>
     <li>Authentication for users</li>
 </ul>
 
@@ -23,6 +24,8 @@ weather conditions. Using Rest API, authentication and payments.</p>
     <li>Stripe</li>
     <li>OpenWeatherMap</li>
     <li>Hammer.js</li>
+    <li>OAuth</li>
+    
 </ul>
 
 <h1>Check it out</h1>
