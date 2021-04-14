@@ -34,6 +34,7 @@ millage:number[]=[];
   ngOnInit(): void {
     this.dataStorageService.getRoutes();
     this.kilometersService.addKilometersMonthly();
+    this.kilometersService.addKilometersYearly();
     this.kilometersMonthly=this.kilometersService.kilometersMonthly;
     this.summaryGears = this.gearService.getGear();
     this.dataStorageService.getPhoto();
