@@ -4,6 +4,9 @@
     class="list-group-item clearfix"
     [@list]> 
     <div>
+        <span style="position: relative;float: right; font-size:24px" (click)="openActivity()" class="material-icons">open_in_new</span>
+        <h4 *ngIf="name"> {{ name.name }} </h4>
+        <h4 *ngIf="!name"> Ride </h4>
         <h5>{{ distance.date }}  {{ distance.amount }} km</h5>
     </div>
  </a>

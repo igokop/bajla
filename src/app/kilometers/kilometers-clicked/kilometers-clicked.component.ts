@@ -29,9 +29,14 @@ import { Distance } from 'src/app/models/distance.model';
 export class KilometersClickedComponent implements OnInit {
 @Input() index: number;
 @Input() distance: Distance;
+@Input() name: any;
   constructor() { }
 
   ngOnInit(): void {
+  }
+  openActivity(){
+    const id = this.name.id;
+    window.open("https://www.strava.com/activities/" + id, "_empty");
   }
 
 }

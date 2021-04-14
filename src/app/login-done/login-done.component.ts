@@ -20,7 +20,8 @@ export class LoginDoneComponent implements OnInit {
 
     setTimeout(()=>{
       const kilometers = this.stravaService.getDistances();
-      console.log(kilometers);
+      const names = this.stravaService.getNames();
+      this.dataStorageService.storeNames(names);
       this.dataStorageService.storeKilometersStrava(kilometers);
       this.kilometersService.kilometers = kilometers;
       this.router.navigate(['home']);

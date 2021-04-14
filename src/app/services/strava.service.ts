@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class StravaService {
+  nameId: any[]=[];
   @Output() stravaProfile: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
   distanceTable: Distance[] = [];
@@ -36,15 +37,21 @@ export class StravaService {
             date = datePipe.transform(data[j].start_date, 'yyyy-MM-dd');
             const training = {date, amount};
             this.addDistance(training);
+            const name = {name: data[j].name, id: data[j].id, date}
+            this.nameId.push(name);
+
           }
         }
       })
     }
 
   }
+  getNames(){
+    this.nameId.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return this.nameId;
+  }
   getDistances(){
     this.distanceTable.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    console.log(this.distanceTable);
     return this.distanceTable;
   }
 

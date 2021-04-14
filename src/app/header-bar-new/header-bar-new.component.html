@@ -13,6 +13,7 @@
       <span *ngIf="!photo" style="cursor:pointer; font-size: 54px;" class="material-icons">account_circle</span>
       <img style="height: 54px; border-radius:99%" *ngIf="photo" src="{{ photo.profile }}">
       <h4>{{userData.email}}</h4>
+      <p *ngIf="yearly.length > 0" class="help-block" style="font-size: 12px">Distance this year: {{ yearly[0].amount }}km</p>
       <hr>
       <p style="cursor:pointer" routerLink="/subscription" (click)="changeAlertState()">Donation</p>
       <p style="cursor:pointer" (click)="stravaButton()">Connect with Strava</p>

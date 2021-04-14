@@ -14,6 +14,7 @@ export class DataStorageService{
     constructor(private routesService: RoutesService, private http: HttpClient, private kilometersService: KilometersService, private gearService: GearService, private authentService: AuthentService){}
     @Output() getDonation: EventEmitter<any> = new EventEmitter();
     @Output() getPhotos: EventEmitter<any> = new EventEmitter();
+    @Output() getNamesId: EventEmitter<any> = new EventEmitter();
     storeKilometers(){
         this.authentService.user.subscribe(user => {
             const distance = this.kilometersService.getDistance();
@@ -29,6 +30,22 @@ export class DataStorageService{
             this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/' + user.id + '/distance.json', distance).subscribe(response=>{console.log(response)});
         })
     }
+    storeNames(names){
+        this.authentService.user.subscribe(user => {
+            this.http.put('https://bajla-bike-default-rtdb.firebaseio.com/' + user.id + '/names.json', names).subscribe(response=>{console.log(response)});
+        })
+    }
+
+    getNames(){
+        const userData =JSON.parse(localStorage.getItem('userData'));
+        this.http.get<Route[]>('https://bajla-bike-default-rtdb.firebaseio.com/'+ userData.id + '/names.json').subscribe(names=>{
+        if(names){
+            this.getNamesId.emit(names);
+            this.kilometersService.kilometersNames = names;
+        }
+        });
+    }
+    
 
     storeGears(){
         this.authentService.user.subscribe(user => {

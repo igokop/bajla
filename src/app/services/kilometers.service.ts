@@ -1,13 +1,18 @@
+import { EventEmitter } from "@angular/core";
 import { Subject, Subscription } from "rxjs";
 import { Distance } from "../models/distance.model";
 import { Monthly } from "../models/monthly.model";
 
 
 export class KilometersService {
+  kilometersNames: any[] = [];
   kilometersChanged = new Subject<Distance[]>();
+  getYearly = new EventEmitter;
   kilometers: Distance[]=[];
   kilometersMonthly: Monthly[]=[];
+  kilometersYearly: any[]=[];
   done: string[]=[];
+  doneYear: string[]=[];
   constructor() { }
   addDaily(date: string, distance: number){
     const newDistance = new Distance (date, distance);
@@ -35,6 +40,28 @@ export class KilometersService {
       }
       this.done[i]='done';
     }
+    
+  }
+  addKilometersYearly(){
+    const index = this.kilometers.length;
+    for(let i = 0; i<index ; i++){
+      const dateD = this.kilometers[i].date.split('-');
+      let when = 0;
+      const index2 = this.kilometersYearly.length;
+      for(let j=0; j<index2; j++)
+      { 
+      if(dateD[0] == this.kilometersYearly[j].year && this.doneYear[i] != 'done')
+      {
+        when++;
+        this.kilometersYearly[j].amount=(+this.kilometersYearly[j].amount + +this.kilometers[i].amount);
+      }
+    }if(when==0 && this.doneYear[i] != 'done'){
+      const newYear= {year: dateD[0], amount: this.kilometers[i].amount};
+      this.kilometersYearly.push(newYear);
+    }
+    this.doneYear[i]='done';
+  }
+  this.getYearly.emit(this.kilometersYearly);
     
   }
   getDistance(){

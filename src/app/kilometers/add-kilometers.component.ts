@@ -22,6 +22,7 @@ import { KilometersService } from '../services/kilometers.service';
 })
 export class AddKilometersComponent implements OnInit, OnChanges {
   kilometers: Distance[];
+  names: any[]=[];
   showModal: boolean;
   showModal2: boolean;
   dailyDistance: FormGroup;
@@ -52,6 +53,7 @@ export class AddKilometersComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.names = this.kilometersService.kilometersNames;
     this.kilometers = this.kilometersService.getDistance();
     this.dailyDistance = new FormGroup({
       'date': new FormControl(null, Validators.required),
@@ -63,7 +65,10 @@ export class AddKilometersComponent implements OnInit, OnChanges {
           this.kilometers = kilometers;
         }
       );
-      
+    // this.dataStorageService.getNamesId.subscribe(data=>{
+    //   this.names = data;
+    //   console.log(data);
+    // });
   }
   
   ngOnChanges(){

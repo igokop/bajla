@@ -7,6 +7,7 @@ import { DataStorageService } from '../services/data-storage-service';
 import { AuthentService } from '../auth/authen.service';
 import { Router } from '@angular/router';
 import { StravaService } from '../services/strava.service';
+import { KilometersService } from '../services/kilometers.service';
 
 @Component({
   selector: 'app-header-bar-new',
@@ -15,6 +16,7 @@ import { StravaService } from '../services/strava.service';
 })
 export class HeaderBarNewComponent implements OnInit{
   photo:any;
+  yearly: any[]=[];
   logged = false;
   openedAlert = false;
   userDataEmail: string;
@@ -25,7 +27,7 @@ export class HeaderBarNewComponent implements OnInit{
       shareReplay()
     );
 
-  constructor(private stravaService: StravaService, private router: Router, private breakpointObserver: BreakpointObserver,private authService: AuthService, private dataStorageService: DataStorageService, private authentService:AuthentService) {}
+  constructor(private kilometersService: KilometersService, private stravaService: StravaService, private router: Router, private breakpointObserver: BreakpointObserver,private authService: AuthService, private dataStorageService: DataStorageService, private authentService:AuthentService) {}
   ngOnInit(): void {
     this.authentService.user.subscribe(user =>{
       if(user){
@@ -39,7 +41,10 @@ export class HeaderBarNewComponent implements OnInit{
       this.dataStorageService.storePhoto(data)})
     this.dataStorageService.getPhotos.subscribe(photo =>{
       this.photo=photo;
-      });
+    });
+    this.kilometersService.getYearly.subscribe(data => {
+      this.yearly = data;
+    })
   }
 
   getUserData(){
