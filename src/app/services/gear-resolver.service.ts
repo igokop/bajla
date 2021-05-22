@@ -10,5 +10,6 @@ export class GearResolverService implements Resolve<Gear[]>{
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
         return this.dataStorageService.getGears();
+        
     }
 }

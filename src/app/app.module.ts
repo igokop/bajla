@@ -49,6 +49,9 @@ import { StripeCreateTokenComponent } from './stripe-create-token/stripe-create-
 import { AlertPayComponent } from './alerts/alert-pay/alert-pay.component';
 import { LoginDoneComponent } from './login-done/login-done.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MapComponent } from './map/map.component';
+import { AlertMapComponent } from './alerts/alert-map/alert-map.component';
+import { MapService } from './services/map.service';
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
@@ -84,7 +87,9 @@ export class HammerConfig extends HammerGestureConfig {
     SimpleComponent,
     StripeCreateTokenComponent,
     AlertPayComponent,
-    LoginDoneComponent
+    LoginDoneComponent,
+    MapComponent,
+    AlertMapComponent
     
   ],
   imports: [
@@ -108,7 +113,7 @@ export class HammerConfig extends HammerGestureConfig {
     NgxStripeModule.forRoot('pk_test_51IYxfyC4X84AfpFj1Z9TBhDke2AfVKbYHoJha9Ny5LyugUnmmuszRuGQlpGrxJROy9y56vFu4ruGiaU37YDkYoMM00HsNOd3rk'),
     AppRoutingModule
   ],
-  providers: [KilometersService, SummaryService, GearService, AuthGuard, AuthService, RoutesService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInteceptorService, multi: true},{provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}],
+  providers: [KilometersService, MapService, SummaryService, GearService, AuthGuard, AuthService, RoutesService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInteceptorService, multi: true},{provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}],
   bootstrap: [AppComponent],
   exports: []
 })

@@ -1,5 +1,5 @@
 import { TOUCH_BUFFER_MS } from "@angular/cdk/a11y";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable, Output } from "@angular/core";
 import { Subject } from "rxjs";
 import { KilometersClickedComponent } from "../kilometers/kilometers-clicked/kilometers-clicked.component";
 import { Gear } from "../models/gear.model";
@@ -14,9 +14,11 @@ export class GearService {
     closed=true;
     gears: Gear[]=[];
     
-    
+    @Output() updateGears: EventEmitter<any> = new EventEmitter();
+
     constructor(private kilometersService: KilometersService) { }
     getGear(){
+        // this.updateGears.emit(this.gears);
         return this.gears;
     }
     addNew(name: string, date: string, interval: number, actualDistance: number){

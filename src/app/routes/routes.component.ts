@@ -40,6 +40,8 @@ export class RoutesComponent implements OnInit {
   constructor(private routesService: RoutesService, private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
+    this.dataStorageService.getRoutes();
+    this.routesService.getWeatherData();
     this.forecast = this.routesService.forecast;
     this.view();
     this.routesService.getWeatherData();
@@ -73,7 +75,6 @@ export class RoutesComponent implements OnInit {
     if(!this.forecastToday.rain){
       this.forecastToday.rain = 0;
     }
-
 
     this.forecastTomorrow = this.forecast.daily[1];
     if(this.forecastTomorrow.temp.day -273 > -80){
@@ -189,6 +190,8 @@ export class RoutesComponent implements OnInit {
 
   viewPoints(i: number){
     this.points = this.routes[i].points;
+    this.points[0].direction = Math.round(this.points[0].direction *10)/10.0;
+    this.points[1].direction = Math.round(this.points[1].direction *10)/10.0;
     this.alertOpen = true;
     this.i=i;
   }

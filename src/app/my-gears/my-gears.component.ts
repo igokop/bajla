@@ -40,6 +40,11 @@ export class MyGearsComponent implements OnInit {
 
   
   ngOnInit(){
+    // this.gearService.updateGears.subscribe(data => {
+    //   this.gears = data;
+    //   console.log(data);
+    // })
+    this.dataStorageService.getGears();
     this.gears = this.gearService.getGear();
     this.gearForm = new FormGroup({
       'name': new FormControl(null,Validators.required),

@@ -29,8 +29,10 @@ export class RoutesService {
       this.routes[i].avgSpeed = 0;
       for(let j=0; j<this.routes[i].points.length; j++)
       {
-        const cityName = this.routes[i].points[j].name;
-        fetch('https://api.openweathermap.org/data/2.5/weather?q='+ cityName +'&appid=5e37c2fbddf98133163d1f3b26ca7ba4')
+        const lat = this.routes[i].points[j].lat;
+        const lon = this.routes[i].points[j].lon;
+
+        fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat +'&lon='+ lon +'&appid=5e37c2fbddf98133163d1f3b26ca7ba4')
         .then(response => response.json())
         .then(data => {
           this.setWeatherPoints(data, i, j);
@@ -110,9 +112,11 @@ export class RoutesService {
 
   addNewRoute(route: Route){
     this.routes.push(route);
+    console.log(this.routes);
   }
 
   getRoutes(){
+    console.log(this.routes);
     return this.routes;
   }
 

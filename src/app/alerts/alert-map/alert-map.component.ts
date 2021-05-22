@@ -3,9 +3,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage-service';
 
 @Component({
-  selector: 'app-alert-info',
-  templateUrl: './alert-info.component.html',
-  styleUrls: ['./alert-info.component.css'],
+  selector: 'app-alert-map',
+  templateUrl: './alert-map.component.html',
+  styleUrls: ['./alert-map.component.css'],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -18,24 +18,14 @@ import { DataStorageService } from '../../services/data-storage-service';
     ])
   ]
 })
-export class AlertInfoComponent implements OnInit {
-@Input() message: string;
+export class AlertMapComponent implements OnInit {
 @Output() close = new EventEmitter<void>();
-@Output() delete = new EventEmitter<void>();
-deleteActivate = false;
   constructor(private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
   }
   closeIt(){
     this.close.emit();
-  }
-  deleteIt(){
-    this.delete.emit();
-    this.close.emit();
-  }
-  deleteActive(){
-    this.deleteActivate = !this.deleteActivate;
   }
   
 }

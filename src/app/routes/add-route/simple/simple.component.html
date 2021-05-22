@@ -1,12 +1,17 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-            <div style="color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6" class="modal-dialog">
+            <div style="color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content" *ngIf="!step2Active && !step3Active">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel">Add new route</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add new route</h4>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="newSimpleRoute" (ngSubmit)="onSubmit()">
+                    <div>
+                        <p>1) Type name and distance</p>
+                        <p>2) Select your home point</p>
+                        <p>3) Select point where you will turn around</p>
+                    </div>
+                    <form [formGroup]="newSimpleRoute" (ngSubmit)="step1()">
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label><span class="material-icons">drive_file_rename_outline</span> Name</label>
@@ -17,40 +22,27 @@
                                 <input style="font-size:16px" type="number" formControlName="distance" class="form-control" />
                             </div>
                         </div>
+                    </form> 
+                    <p style="color: rgb(14, 20, 15, 0.001)">i</p>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="!newSimpleRoute.valid" class="btn btn-dark" style="color: white; background-color:rgb(14, 20, 15, 0.7);" (click)="step1()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label><span class="material-icons">place</span> Start</label>
-                                <input style="font-size:16px" type="text" formControlName="startCity" class="form-control" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label><span class="material-icons">not_listed_location</span> Destination</label>
-                                <input style="font-size:16px" type="text" formControlName="destinationCity" class="form-control" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label><span class="material-icons">directions</span> Destination direction</label>
-                                <select formControlName="direction" class="form-control">
-                                    <option value="180">North</option>
-                                    <option value="0">South</option>
-                                    <option value="90">West</option>
-                                    <option value="270">East</option>
-                                    <option value="135">North-West</option>
-                                    <option value="225">North-East</option>
-                                    <option value="45">South-West</option>
-                                    <option value="315">South-East</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- <button style="color: rgb(14, 20, 15, 0.7); background-color:white" type="submit" [disabled]="!newSimpleRoute.valid" class="btn">Add</button> -->
-                        <hr>
-                        <button [disabled]="!newSimpleRoute.valid" class="btn btn-dark" style="color: white; background-color:rgb(14, 20, 15, 0.7);" (click)="onSubmit()">ADD</button>
-                    </form>
-                    
-                    
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10" class="modal-dialog" *ngIf="step2Active || step3Active" style="height: 70vh;">
+            <div style="height: 100%; width: 100%; color: white; background-color:rgb(14, 20, 15, 0.7)"class="modal-content">
+                <div class="modal-header" style="height: 10%;">
+                  <h4 class="modal-title" id="myModalLabel" *ngIf="step2Active">Select your home point</h4>
+                  <h4 class="modal-title" id="myModalLabel" *ngIf="step3Active">Select point of turning around</h4>
+                </div>
+                <div style="height:90%; color: black" class="modal-body">
+                    <app-map></app-map>
                 </div>
             </div>
         </div>

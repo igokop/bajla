@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-4" *ngIf="routes.length === 0">
             <hr>
             <div style="background-color: rgb(14, 20, 15, 0.7); color: white; border-radius:10px;">
-                Click <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
+                Click <span class="material-icons" routerLink="/simpleWay" style="cursor: pointer; font-size: 40px; padding-right: 5px">
                 add_road</span> to add new route!
             </div>
         </div>
@@ -19,7 +19,6 @@
                             arrow_circle_down
                         </span>
                         <p style="font-size: 25px; color:white">{{ point.name }}</p>
-                        <p style="color:white" class="help-block">{{point.windSpeed}} km/h</p>
                         <p style="color:white" class="help-block">Recomendation:</p>
                         <div class="progress" style="height: 1px;" *ngIf="point.windSpeed < 10">
                             <div class="progress-bar" role="progressbar" style="background:rgb(0, 255, 0); width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -165,7 +164,7 @@
         alt_route
     </span>- Stay home! </p>
     <span style="width: 99.5%;"></span>
-    <span class="material-icons" routerLink="/createNewRoute" style="cursor: pointer; font-size: 40px; padding-right: 5px">
+    <span class="material-icons" routerLink="/simpleWay" style="cursor: pointer; font-size: 40px; padding-right: 5px">
         add_road
     </span>
 </mat-toolbar>
